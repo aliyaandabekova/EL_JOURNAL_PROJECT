@@ -12,7 +12,7 @@ class Subject(models.Model):
 class Score(models.Model):
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
     pupil = models.CharField(max_length=20,default='Ученик')
-    score = models.PositiveIntegerField()
-    date_created = models.DateTimeField(default=None)
+    score = models.PositiveIntegerField(default=0)
+    date_created = models.DateTimeField(auto_now_add=True)
 
 
