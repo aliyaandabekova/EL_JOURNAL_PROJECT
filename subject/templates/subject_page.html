@@ -1,5 +1,5 @@
 {% for subject in subjects %}
-    {{ subject.title }}
+    <a href="{% url 'pupils' subject.id %}">{{ subject.title }}</a>
     <br>
 
 {% endfor %}
