@@ -1,0 +1,13 @@
+{{ pupil.name }}
+<img src="{{ pupil.photo.url }}" height=50 width=60>
+<br>
+{% for subject in subjects_of_pupil %}
+    {{ subject.title }}
+    <br>
+{% endfor %}
+
+{% for score in scores %}
+    {{ score.score }}
+{% endfor %}
+
+
