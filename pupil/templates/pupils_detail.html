@@ -1,0 +1,4 @@
+{% for pupil in pupils %}
+    <a href="{% url 'pupil_detail' pupil.id %}">{{ pupil.name }}</a>
+    <br>
+{% endfor %}
