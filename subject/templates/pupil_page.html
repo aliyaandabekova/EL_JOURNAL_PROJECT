@@ -1,0 +1,5 @@
+{% for pupil in pupils %}
+    <a href="{% url 'scores' pupil.id subject.id %}"> {{ pupil.name }}</a> {{ pupil.avg_score }}
+    <br>
+
+{% endfor %}
