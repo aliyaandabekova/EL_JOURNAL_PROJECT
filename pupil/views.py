@@ -1,3 +1,5 @@
+from django.contrib.auth.models import AnonymousUser
+from django.http import HttpResponse
 from django.shortcuts import render
 from subject.models import *
 
@@ -8,6 +10,8 @@ def pupil_page(request,subject_id):
     return render(request,'pupil_page.html',{'pupils':pupils, 'subject':subjects})
 
 def pupils_detail(request):
+    if isinstance(request.user,AnonymousUser):
+        return HttpResponse('Вы не авторизованы!')
     subjects = Subject.objects.filter(teacher=request.user)
     pupils = Pupil.objects.filter(subject__in=subjects).distinct()
     return render(request, 'pupils_detail.html', {'pupils':pupils})
