@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .models import *
 from .forms import ScoreForm
 from django.http import HttpResponse
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from pupil.services import avg_score_count
 from django.contrib.auth.models import AnonymousUser
 
@@ -25,12 +25,22 @@ def login_page(request):
         password =  request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         login(request, user)
-        return redirect('subjects')
+        return redirect('home')
     return render(request, 'login.html')
 
+def logout_page(request):
+    logout(request)
+    return redirect('home')
+
 def score_page(request,pupil_id,subject_id):
-    subject = Subject.objects.get(id=subject_id)
-    pupil = Pupil.objects.get(id=pupil_id)
+    try:
+        subject = Subject.objects.get(id=subject_id)
+    except Subject.DoesNotExist:
+        return HttpResponse('Авторизуйтесь или у вас нет урока по указанному id')
+    try:
+        pupil = Pupil.objects.get(id=pupil_id)
+    except Pupil.DoesNotExist:
+        return HttpResponse('Ученика по указанным id нет')
     scores = pupil.score_set.all()
     print(scores)
     form = ScoreForm()
