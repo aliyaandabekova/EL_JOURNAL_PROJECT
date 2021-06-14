@@ -21,7 +21,7 @@ class Pupil(models.Model):
     name = models.CharField(max_length=30,default='Алия')
     subject = models.ManyToManyField(Subject)
     avg_score = models.FloatField(default=0)
-    photo = models.ImageField()
+    photo = models.ImageField(default='две_девушки.jpg')
     def __str__(self):
         return self.name
 
